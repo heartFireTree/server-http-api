@@ -14,9 +14,10 @@ public ApiResult GetMerber(string qr)
           string url = "localhost:8080/crm/VIPCus/GetVIPInfoByApi";
           httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-          //直接传递对象的方式, 接受方 需要在函数前加上[FormBody]
+          //直接传递对象的方式, 接受方 函数参数类型[FormBody] JObject
           //var dic = new Dictionary<string, string>();
-          //dic.Add("GetData", qr);
+          //dic.Add("GetData", qr);//qr可以是任何已经序列化的对象或数组对象
+          //(这种方式from表单体请求提交的方式不需要添加Headers,框架将自动对应解析参数)
           //HttpContent httpContent = new FormUrlEncodedContent(dic);
           
           //参数对象
