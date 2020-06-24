@@ -27,12 +27,17 @@ public ApiResult GetMerber(string qr)
           content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
           
           HttpResponseMessage httpResponseMessage = httpClient.PostAsync(url, content).Result;
-          apiresult = JsonConvert.DeserializeObject<MemberResult>(httpResponseMessage.Content.ReadAsStringAsync().Result);
-
-          if (ApiResul.Data != null)
+          //验证API请求是否成功
+          if (httpResponseMessage.IsSuccessStatusCode)
           {
-              ApiResul.Data = JsonConvert.DeserializeObject(ApiResul.Data.ToString());
+            apiresult = JsonConvert.DeserializeObject<MemberResult>(httpResponseMessage.Content.ReadAsStringAsync().Result);
+
+            if (ApiResul.Data != null)
+            {
+                ApiResul.Data = JsonConvert.DeserializeObject(ApiResul.Data.ToString());
+            }
           }
+          
       }
       return apiresult;
   }
